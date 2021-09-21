@@ -28,7 +28,7 @@ const Post = ({ post, setCurrentId }) => {
         (like) => like === (user?.result?.googleId || user?.result?._id)
       ) ? (
         <>
-          <ThumbUpAltIcon fontSize="small" />
+          <ThumbUpAltIcon fontSize="default" />
           &nbsp;
           {post.likes.length > 2
             ? `You and ${post.likes.length - 1} others`
@@ -36,7 +36,7 @@ const Post = ({ post, setCurrentId }) => {
         </>
       ) : (
         <>
-          <ThumbUpAltOutlined fontSize="small" />
+          <ThumbUpAltOutlined fontSize="default" />
           &nbsp;{post.likes.length} {post.likes.length === 1 ? "Like" : "Likes"}
         </>
       );
@@ -44,7 +44,7 @@ const Post = ({ post, setCurrentId }) => {
 
     return (
       <>
-        <ThumbUpAltOutlined fontSize="small" />
+        <ThumbUpAltOutlined fontSize="default" />
         &nbsp;Like
       </>
     );
@@ -105,7 +105,7 @@ const Post = ({ post, setCurrentId }) => {
             size="small"
             color="secondary"
             onClick={() => dispatch(deletePost(post._id))}>
-            <DeleteIcon fontSize="small" /> Delete
+            <DeleteIcon fontSize="default" /> Delete
           </Button>
         )}
       </CardActions>

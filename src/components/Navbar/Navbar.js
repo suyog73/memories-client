@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { AppBar, Avatar, Button, Toolbar, Typography } from "@material-ui/core";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import decode from "jwt-decode";
@@ -12,8 +12,13 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
- 
-  console.log(user);
+
+  // console.log(user);
+  const logout = useCallback(() => {
+    dispatch({ type: "LOGOUT" });
+    history.push("/");
+    setUser(null);
+  }, [dispatch, history, setUser]);
 
   useEffect(() => {
     const token = user?.token;
@@ -25,13 +30,7 @@ const Navbar = () => {
     }
 
     setUser(JSON.parse(localStorage.getItem("profile")));
-  }, [location]);
-
-  const logout = () => {
-    dispatch({ type: "LOGOUT" });
-    history.push("/");
-    setUser(null);
-  };
+  }, [location, user?.token, logout]);
 
   return (
     <AppBar className={classes.appBar} position="static" color="inherit">
