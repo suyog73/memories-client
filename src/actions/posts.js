@@ -1,4 +1,4 @@
-import * as api from "../api";
+import * as api from "../api/index";
 import { CREATE, DELETE, FETCH_ALL, UPDATE } from "../constants/actionTypes";
 
 export const getPosts = () => async (dispatch) => {
