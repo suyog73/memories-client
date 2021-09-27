@@ -1,7 +1,7 @@
 import axios from "axios";
 
-// const API = axios.create({ baseURL: "http://localhost:5000" });
-const API = axios.create({ baseURL: "https://memories-sp.herokuapp.com" });
+const API = axios.create({ baseURL: "http://localhost:5000" });
+// const API = axios.create({ baseURL: "https://memories-sp.herokuapp.com" });
 API.interceptors.request.use((req) => {
   if (localStorage.getItem("profile")) {
     req.headers.Authorization = `Bearer ${
@@ -13,7 +13,13 @@ API.interceptors.request.use((req) => {
 });
 // const url = "https://memories-sp.herokuapp.com/posts";
 
-export const fetchPosts = () => API.get("/posts");
+export const fetchPosts = (page) => API.get(`/posts?page=${page}`);
+export const fetchPostsBySearch = (searchQuery) =>
+  API.get(
+    `/posts/search?searchQuery=${searchQuery.search || "none"}&tags=${
+      searchQuery.tags
+    }`
+  );
 export const createPost = (newPost) => API.post("/posts", newPost);
 export const updatePost = (id, updatedPost) =>
   API.patch(`/posts/${id}`, updatedPost);
