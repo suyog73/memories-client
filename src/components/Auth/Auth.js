@@ -63,6 +63,7 @@ const Auth = () => {
       history.push("/");
     } catch (error) {
       console.log(error);
+      alert("Error to sign in with google. Please try again!");
     }
   };
 

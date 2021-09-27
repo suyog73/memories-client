@@ -28,7 +28,7 @@ const Post = ({ post, setCurrentId }) => {
         (like) => like === (user?.result?.googleId || user?.result?._id)
       ) ? (
         <>
-          <ThumbUpAltIcon fontSize="default" />
+          <ThumbUpAltIcon fontSize="medium" />
           &nbsp;
           {post.likes.length > 2
             ? `You and ${post.likes.length - 1} others`
@@ -36,7 +36,7 @@ const Post = ({ post, setCurrentId }) => {
         </>
       ) : (
         <>
-          <ThumbUpAltOutlined fontSize="default" />
+          <ThumbUpAltOutlined fontSize="medium" />
           &nbsp;{post.likes.length} {post.likes.length === 1 ? "Like" : "Likes"}
         </>
       );
@@ -44,16 +44,17 @@ const Post = ({ post, setCurrentId }) => {
 
     return (
       <>
-        <ThumbUpAltOutlined fontSize="default" />
+        <ThumbUpAltOutlined fontSize="medium" />
         &nbsp;Like
       </>
     );
   };
 
   return (
-    <Card className={classes.card}>
+    <Card className={classes.card} raised elevation={6}>
       <CardMedia
         className={classes.media}
+        // component="img"
         image={post.selectedFile || post.selectedUrl}
         title={post.title}
       />
@@ -70,7 +71,7 @@ const Post = ({ post, setCurrentId }) => {
             onClick={() => setCurrentId(post._id)}
             style={{ color: "white" }}
             size="small">
-            <MoreHorizIcon fontSize="default" />
+            <MoreHorizIcon fontSize="medium" />
           </Button>
         </div>
       )}
@@ -88,7 +89,7 @@ const Post = ({ post, setCurrentId }) => {
       </Typography>
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          {post.message}
+          {post.message.slice(0, 200)} ...
         </Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>
@@ -105,7 +106,7 @@ const Post = ({ post, setCurrentId }) => {
             size="small"
             color="secondary"
             onClick={() => dispatch(deletePost(post._id))}>
-            <DeleteIcon fontSize="default" /> Delete
+            <DeleteIcon fontSize="medium" /> Delete
           </Button>
         )}
       </CardActions>

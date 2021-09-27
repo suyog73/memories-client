@@ -5,10 +5,16 @@ export const signin = (formData, history) => async (dispatch) => {
   try {
     // login user
 
-    const { data } = await api.signIn(formData);
+    const resp = await api.signIn(formData);
+    console.log(resp);
+    const { data, status } = await api.signIn(formData);
     dispatch({ type: AUTH, data });
 
-    history.push("/");
+    console.log("status: " + status);
+    if (status === 200) {
+      alert("Successfully Logged In");
+    }
+    history.push("/");  
   } catch (error) {
     console.log(error);
   }
@@ -17,10 +23,12 @@ export const signin = (formData, history) => async (dispatch) => {
 export const signup = (formData, history) => async (dispatch) => {
   try {
     // Signup user
-    const { data } = await api.signUp(formData);
+    const { data, status } = await api.signUp(formData);
 
     dispatch({ type: AUTH, data });
-
+    if (status === 200) {
+      alert("Successfully Registered");
+    }
     history.push("/");
   } catch (error) {
     console.log(error);
